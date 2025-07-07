@@ -285,7 +285,7 @@ export default function Dropzone() {
                   }}
                   value={selcted}
                 >
-                  <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-gray-600 bg-gray-50 text-md font-medium">
+                  <SelectTrigger className="w-32 outline-hidden focus:outline-hidden focus:ring-0 text-center text-gray-600 bg-gray-50 text-md font-medium">
                     <SelectValue placeholder="..." />
                   </SelectTrigger>
                   <SelectContent className="h-fit">
@@ -433,7 +433,7 @@ export default function Dropzone() {
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className=" bg-gray-50 h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-2 border-dashed cursor-pointer flex items-center justify-center"
+          className=" bg-gray-50 h-72 lg:h-80 xl:h-96 rounded-3xl shadow-xs border-2 border-dashed cursor-pointer flex items-center justify-center"
         >
           <input {...getInputProps()} />
           <div className="space-y-4 text-gray-500">
