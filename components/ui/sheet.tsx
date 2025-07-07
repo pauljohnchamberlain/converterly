@@ -13,6 +13,7 @@ const SheetTrigger = SheetPrimitive.Trigger
 
 const SheetClose = SheetPrimitive.Close
 
+// COMMENTED OUT BELOW - WAS GETTING AN ERROR - Type error: Property 'className' does not exist on type 'DialogPortalProps'
 // const SheetPortal = ({
 //   className,
 //   ...props
