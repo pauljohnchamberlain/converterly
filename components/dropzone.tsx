@@ -72,11 +72,11 @@ export default function Dropzone() {
   const [is_hover, setIsHover] = useState<boolean>(false);
   const [actions, setActions] = useState<Action[]>([]);
   const [is_ready, setIsReady] = useState<boolean>(false);
-  const [files, setFiles] = useState<Array<any>>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [is_loaded, setIsLoaded] = useState<boolean>(false);
   const [is_converting, setIsConverting] = useState<boolean>(false);
   const [is_done, setIsDone] = useState<boolean>(false);
-  const ffmpegRef = useRef<any>(null);
+  const ffmpegRef = useRef<FFmpeg | null>(null);
   const [defaultValues, setDefaultValues] = useState<string>("video");
   const [selcted, setSelected] = useState<string>("...");
   const accepted_files = {
@@ -106,32 +106,39 @@ export default function Dropzone() {
     setIsConverting(false);
   };
   const downloadAll = (): void => {
-    for (let action of actions) {
-      !action.is_error && download(action);
+    for (const action of actions) {
+      if (!action.is_error) {
+        download(action);
+      }
     }
   };
   const download = (action: Action) => {
     const a = document.createElement("a");
     a.style.display = "none";
-    a.href = action.url;
-    a.download = action.output;
+    a.href = action.url || "";
+    a.download = action.output || "";
 
     document.body.appendChild(a);
     a.click();
 
     // Clean up after download
-    URL.revokeObjectURL(action.url);
+    if (action.url) {
+      URL.revokeObjectURL(action.url);
+    }
     document.body.removeChild(a);
   };
-  const convert = async (): Promise<any> => {
+  const convert = async (): Promise<void> => {
     let tmp_actions = actions.map((elt) => ({
       ...elt,
       is_converting: true,
     }));
     setActions(tmp_actions);
     setIsConverting(true);
-    for (let action of tmp_actions) {
+    for (const action of tmp_actions) {
       try {
+        if (!ffmpegRef.current) {
+          throw new Error("FFmpeg not loaded");
+        }
         const { url, output } = await convertFile(ffmpegRef.current, action);
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
@@ -142,10 +149,10 @@ export default function Dropzone() {
                 url,
                 output,
               }
-            : elt
+            : elt,
         );
         setActions(tmp_actions);
-      } catch (err) {
+      } catch {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
@@ -154,7 +161,7 @@ export default function Dropzone() {
                 is_converting: false,
                 is_error: true,
               }
-            : elt
+            : elt,
         );
         setActions(tmp_actions);
       }
@@ -162,12 +169,11 @@ export default function Dropzone() {
     setIsDone(true);
     setIsConverting(false);
   };
-  const handleUpload = (data: Array<any>): void => {
+  const handleUpload = (data: File[]): void => {
     handleExitHover();
     setFiles(data);
     const tmp: Action[] = [];
-    data.forEach((file: any) => {
-      const formData = new FormData();
+    data.forEach((file: File) => {
       tmp.push({
         file_name: file.name,
         file_size: file.size,
@@ -184,7 +190,7 @@ export default function Dropzone() {
   };
   const handleHover = (): void => setIsHover(true);
   const handleExitHover = (): void => setIsHover(false);
-  const updateAction = (file_name: String, to: String) => {
+  const updateAction = (file_name: string, to: string) => {
     setActions(
       actions.map((action): Action => {
         if (action.file_name === file_name) {
@@ -196,27 +202,30 @@ export default function Dropzone() {
         }
 
         return action;
-      })
+      }),
     );
-  };
-  const checkIsReady = (): void => {
-    let tmp_is_ready = true;
-    actions.forEach((action: Action) => {
-      if (!action.to) tmp_is_ready = false;
-    });
-    setIsReady(tmp_is_ready);
   };
   const deleteAction = (action: Action): void => {
     setActions(actions.filter((elt) => elt !== action));
     setFiles(files.filter((elt) => elt.name !== action.file_name));
   };
   useEffect(() => {
+    const checkIsReady = (): void => {
+      let tmp_is_ready = true;
+      actions.forEach((action: Action) => {
+        if (!action.to) tmp_is_ready = false;
+      });
+      setIsReady(tmp_is_ready);
+    };
+
     if (!actions.length) {
       setIsDone(false);
       setFiles([]);
       setIsReady(false);
       setIsConverting(false);
-    } else checkIsReady();
+    } else {
+      checkIsReady();
+    }
   }, [actions]);
   useEffect(() => {
     load();
@@ -231,7 +240,7 @@ export default function Dropzone() {
   if (actions.length) {
     return (
       <div className="space-y-6">
-        {actions.map((action: Action, i: any) => (
+        {actions.map((action: Action, i: number) => (
           <div
             key={i}
             className="w-full py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl border h-fit lg:h-20 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between"
