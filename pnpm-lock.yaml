@@ -63,8 +63,8 @@ importers:
         specifier: ^15.4.4
         version: 15.4.4(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3)
       lucide-react:
-        specifier: ^0.532.0
-        version: 0.532.0(react@19.1.1)
+        specifier: ^0.533.0
+        version: 0.533.0(react@19.1.1)
       next:
         specifier: ^15.4.4
         version: 15.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1137,8 +1137,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001730:
-    resolution: {integrity: sha512-HxbPuQqVxzXwkGQoES51WOlyIzF6K13ZGujqbKWGrWI5NPjbZQHfo7vKaHMDvRK+TZclq77228BuFNy4d68UAA==}
+  caniuse-lite@1.0.30001731:
+    resolution: {integrity: sha512-lDdp2/wrOmTRWuoB5DpfNkC0rJDU8DqRa6nYL6HK6sytw70QMopt/NIc/9SM7ylItlBWfACXk0tEn37UWM/+mg==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -1817,8 +1817,8 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
-  lucide-react@0.532.0:
-    resolution: {integrity: sha512-HwmXOIZwuZ21wryFq0ZrwkjAMxI77+jLxLdNzWCiUa/Kf5ozkTFCWT6C1/yapP68uKgj8wlxxqnNCH1xo9NEpg==}
+  lucide-react@0.533.0:
+    resolution: {integrity: sha512-XwRo6CQowPRe1cfBJITmHytjR3XS4AZpV6rrBFEzoghARgyU2RK3yNRSnRkSFFSQJWFdQ8f4Wk1awgLLSy1NCQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -3337,7 +3337,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001730: {}
+  caniuse-lite@1.0.30001731: {}
 
   chalk@4.1.2:
     dependencies:
@@ -4148,7 +4148,7 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
-  lucide-react@0.532.0(react@19.1.1):
+  lucide-react@0.533.0(react@19.1.1):
     dependencies:
       react: 19.1.1
 
@@ -4201,7 +4201,7 @@ snapshots:
     dependencies:
       '@next/env': 15.4.4
       '@swc/helpers': 0.5.15
-      caniuse-lite: 1.0.30001730
+      caniuse-lite: 1.0.30001731
       postcss: 8.4.31
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
