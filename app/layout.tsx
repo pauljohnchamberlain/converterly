@@ -26,7 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="GTM-NH4G5587" />
       <head>
         <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
         <meta
@@ -35,6 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <GoogleTagManager gtmId="GTM-NH4G5587" />
         <Navbar />
         <Toaster />
         <div className="pt-32 min-h-screen lg:pt-36 2xl:pt-44 container max-w-4xl lg:max-w-6xl 2xl:max-w-7xl">
