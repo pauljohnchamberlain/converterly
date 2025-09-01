@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import GA from "@/components/GA";
-import GTM from "@/components/GTM";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +26,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-      <GTM GTM_ID="GTM-NH4G5587" />
-      <meta
-        name="google-site-verification"
-        content="V8lmEvFOdYBlChgR6pYABBZBhI1EFnPb1YuxTTdHXMU"
-      />
+      <GoogleTagManager gtmId="GTM-NH4G5587" />
+      <head>
+        <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
+        <meta
+          name="google-site-verification"
+          content="V8lmEvFOdYBlChgR6pYABBZBhI1EFnPb1YuxTTdHXMU"
+        />
+      </head>
       <body className={inter.className}>
         <Navbar />
         <Toaster />
